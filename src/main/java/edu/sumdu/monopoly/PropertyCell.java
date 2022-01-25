@@ -1,6 +1,6 @@
 package edu.sumdu.monopoly;
 
-public class PropertyCell extends Cell {
+public class PropertyCell extends OwnedCell {
 	private String colorGroup;
 	private int housePrice;
 	private int numHouses;
@@ -33,7 +33,7 @@ public class PropertyCell extends Cell {
 	}
 
 	private int rentForMonopolies(int rentToCharge) {
-		String [] monopolies = player.getMonopolies();
+		String [] monopolies = owner.getMonopolies();
 		for(int i = 0; i < monopolies.length; i++) {
 			if(monopolies[i].equals(colorGroup)) {
 				rentToCharge = rent * 2;
@@ -46,8 +46,8 @@ public class PropertyCell extends Cell {
 		Player currentPlayer = null;
 		if(!isAvailable()) {
 			currentPlayer = GameMaster.instance().getCurrentPlayer();
-			if(player != currentPlayer) {
-				currentPlayer.payRentTo(player, getRent());
+			if(owner != currentPlayer) {
+				currentPlayer.payRentTo(owner, getRent());
 			}
 		}
 	}

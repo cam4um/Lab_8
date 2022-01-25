@@ -122,8 +122,10 @@ public class GameMaster {
     public void completeTrade(TradeDeal deal) {
         Player seller = getPlayer(deal.getPlayerIndex());
         Cell property = gameBoard.queryCell(deal.getPropertyName());
-        seller.sellProperty(property, deal.getAmount());
-        getCurrentPlayer().buyProperty(property, deal.getAmount());
+        if (property instanceof OwnedCell) {
+        seller.sellProperty((OwnedCell) property, deal.getAmount());
+        getCurrentPlayer().buyProperty((OwnedCell) property, deal.getAmount());
+        }
     }
 
     public Card drawCCCard() {
